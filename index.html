@@ -360,6 +360,40 @@ nav {
   display: block;
 }
 
+
+.guide-access {
+  margin-top: 18px;
+  display: none;
+  text-align: center;
+}
+.guide-access.active {
+  display: block;
+}
+.guide-access a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--wapp);
+  color: #000;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  padding: 14px 24px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.guide-access a:hover {
+  background: #1ebe58;
+  transform: translateY(-2px);
+}
+.guide-small {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted2);
+  line-height: 1.4;
+}
+
 /* ── DIVIDER ── */
 .divider {
   width: 100%;
@@ -729,6 +763,15 @@ footer {
       </button>
       
       <div id="formMessage" class="form-message"></div>
+
+      <div id="guideAccess" class="guide-access">
+        <a href="guia-gratis-cocteleria.pdf" download="guia-gratis-cocteleria.pdf" target="_blank" rel="noopener">
+          Descargar guía ahora
+        </a>
+        <div class="guide-small">
+          Si la descarga no empieza sola, tocá este botón.
+        </div>
+      </div>
     </form>
   </div>
 </div>
@@ -771,6 +814,8 @@ form.addEventListener('submit', async function(e) {
   submitBtn.textContent = 'Enviando...';
   formMessage.className = 'form-message';
   formMessage.textContent = '';
+  const guideAccess = document.getElementById('guideAccess');
+  if (guideAccess) guideAccess.classList.remove('active');
   
   try {
     const response = await fetch(form.action, {
